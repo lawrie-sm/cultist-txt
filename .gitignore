@@ -1,0 +1,7 @@
+.env
+main
+build/
+data/core/
+data/core.db
+NOTES.md
+deploy.sh
