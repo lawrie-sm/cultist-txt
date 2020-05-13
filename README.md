@@ -1,11 +1,11 @@
 # cultist-txt
 
-This is a [Twitter bot](https://twitter.com/cultist_txt), which periodically posts text entries from [Cultist Simulator](https://weatherfactory.biz/cultist-simulator/).
+A Twitter bot which periodically posts text from [Cultist Simulator's](https://weatherfactory.biz/cultist-simulator/) in-game descriptions.
 
-## Data
+### More Information
 
-The text entries have been extracted and cleaned using a shell script, [extract.sh](https://github.com/lawrie-sm/cultist-txt-private/blob/master/extract.sh). They are then stored in an SQLite database. This is a simpler solution than trying to repair and parse the game's JSON files.
+The text entries are extracted and cleaned using a shell script. They are then stored in an SQLite database. The script requires pcregrep and sqlite3, and the game's [core data folder](https://cultistsimulator.gamepedia.com/Modding#Modding_game_files) should be copied into the project's data directory.
 
-The script requires pcregrep and sqlite3 on the path and the game's [core data folder](https://cultistsimulator.gamepedia.com/Modding#Modding_game_files) should be copied into the project's data directory.
+The bot itself is entirely contained in main.go. It will grab a random entry that hasn't been posted, format it correctly. and post it to Twitter using [anaconda](https://github.com/ChimeraCoder/anaconda).
 
 *TODO: Copyright and permission notice*
