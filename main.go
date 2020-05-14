@@ -122,18 +122,16 @@ func main() {
 	s := fmt.Sprintf("%sm", os.Getenv("TWEET_TIME_INTERVAL_MINUTES"))
 	seconds, err := time.ParseDuration(s)
 	check(err)
-	/*
-		api := anaconda.NewTwitterApiWithCredentials(
-			os.Getenv("ACCESS_TOKEN"),
-			os.Getenv("ACCESS_TOKEN_SECRET"),
-			os.Getenv("CONSUMER_KEY"),
-			os.Getenv("CONSUMER_KEY_SECRET"))
-	*/
+	api := anaconda.NewTwitterApiWithCredentials(
+		os.Getenv("ACCESS_TOKEN"),
+		os.Getenv("ACCESS_TOKEN_SECRET"),
+		os.Getenv("CONSUMER_KEY"),
+		os.Getenv("CONSUMER_KEY_SECRET"))
 	for {
 		entry := getRandomEntry()
 		entry = format(entry)
 		fmt.Println(entry)
-		// tweet(api, entry)
+		tweet(api, entry)
 		time.Sleep(seconds)
 	}
 }
