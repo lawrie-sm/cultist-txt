@@ -4,8 +4,8 @@ A Twitter bot which periodically posts text from [Cultist Simulator's](https://w
 
 ### More Information
 
-The text entries are extracted and cleaned using a shell script. They are then stored in an SQLite database. The script requires pcregrep and sqlite3, and the game's [core data folder](https://cultistsimulator.gamepedia.com/Modding#Modding_game_files) should be copied into the project's data directory.
+Text entries are extracted from the game files using a shell script. They are  stored in an SQLite database. The script requires pcregrep and sqlite3. The game's [core data folder](https://cultistsimulator.gamepedia.com/Modding#Modding_game_files) should be copied into the project's data directory.
 
-The bot itself is entirely contained in main.go. It will grab a random entry that hasn't been posted, format it correctly. and post it to Twitter using [anaconda](https://github.com/ChimeraCoder/anaconda).
+The bot will grab a random entry that hasn't yet been posted, format it correctly, and post it to Twitter using [anaconda](https://github.com/ChimeraCoder/anaconda). It will do this until every entry has been posted.
 
 *TODO: Copyright and permission notice*
