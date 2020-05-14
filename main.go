@@ -14,7 +14,6 @@ import (
 )
 
 // Check for errors and raise a panic if they exist
-// Not always used as we can ignore some errors
 func check(err error) {
 	if err != nil {
 		panic(err)
@@ -37,7 +36,7 @@ func spriter(bytes []byte) []byte {
 
 // Returns a function which takes a <b> or <i> string,
 // trims the tag off, and then offsets the letter characters
-// by a given amount (for upper and lowercase) in the unicode table.
+// by a given amount (for upper and lowercase) in the Unicode table.
 // This makes it easy to convert text in <b> and <i> tags into the
 // right "font" using the Mathematical Alphanumeric Block
 func offsetter(uc int, lc int) func([]byte) []byte {
@@ -59,8 +58,9 @@ func offsetter(uc int, lc int) func([]byte) []byte {
 	}
 }
 
-// Adds appropriate formatting by fixing ecaped quotes
-// and the HTML-style tags
+// Adds appropriate formatting by fixing escaped quotes and the HTML-style tags.
+// The hex values are because we are using this Unicode set for formatted text:
+// https://en.wikipedia.org/wiki/Mathematical_Alphanumeric_Symbols#Tables_of_styled_letters_and_digits
 func format(entry string) string {
 	re := regexp.MustCompile("''")
 	quoted := re.ReplaceAllString(entry, "'")
@@ -80,7 +80,7 @@ func format(entry string) string {
 	return string(sprited)
 }
 
-// Tweet an entry strign with the API, printing any errors
+// Tweet an entry string with the API, printing any errors
 func tweet(api *anaconda.TwitterApi, entry string) {
 	tweet, err := api.PostTweet(entry, nil)
 	if err != nil {
@@ -115,7 +115,7 @@ func getRandomEntry() string {
 	return entry
 }
 
-// Load secret tokens/keys from the os environment & create the API
+// Load secret tokens/keys from the OS environment & create the API
 // Then loop forever, grabbing an entry and tweeting it periodically
 func main() {
 	godotenv.Load()
