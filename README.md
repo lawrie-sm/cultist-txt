@@ -1,4 +1,4 @@
-# [cultist_simulator.txt](https://twitter.com/cultist_txt)
+# [cultist_.txt](https://twitter.com/cultist_txt)
 
 A Twitter bot which periodically posts text from [Cultist Simulator's](https://weatherfactory.biz/cultist-simulator/) in-game descriptions.
 
