@@ -8,4 +8,4 @@ Text entries are extracted from the game files using a shell script. They are  s
 
 The bot will grab a random entry that hasn't yet been posted, format it correctly, and post it to Twitter using [anaconda](https://github.com/ChimeraCoder/anaconda). It will do this until every entry has been posted.
 
-*TODO: Copyright and permission notice*
+*Cultist Simulator is the sole property of Weather Factory. All game content used with permission.*
