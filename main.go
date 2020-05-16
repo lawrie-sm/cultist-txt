@@ -130,7 +130,6 @@ func main() {
 	for {
 		entry := getRandomEntry()
 		entry = format(entry)
-		fmt.Println(entry)
 		tweet(api, entry)
 		time.Sleep(seconds)
 	}
