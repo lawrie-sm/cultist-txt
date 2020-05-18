@@ -111,7 +111,6 @@ func main() {
 		os.Getenv("CONSUMER_KEY_SECRET"))
 	for {
 		entry := getRandomEntry()
-		entry := "Test that the <b>tags</b> have been properly <i>trimmed</i>"
 		entry = format(entry)
 		tweet(api, entry)
 		time.Sleep(seconds)
