@@ -10,7 +10,6 @@ import (
 	"regexp"
 	"strings"
 	"time"
-	"unicode"
 )
 
 // Check for errors and raise a panic if they exist
@@ -34,28 +33,11 @@ func spriter(bytes []byte) []byte {
 	return []byte(cased)
 }
 
-// Returns a function which takes a <b> or <i> string,
-// trims the tag off, and then offsets the letter characters
-// by a given amount (for upper and lowercase) in the Unicode table.
-// This makes it easy to convert text in <b> and <i> tags into the
-// right "font" using the Mathematical Alphanumeric Block
-func offsetter(uc int, lc int) func([]byte) []byte {
-	return func(bytes []byte) []byte {
-		s := string(bytes)
-		trimmed := s[3 : len(s)-4]
-		offset := make([]rune, len(trimmed))
-		for i, r := range trimmed {
-			o := r
-			if unicode.IsUpper(r) {
-				o = rune(int(r) + uc - 0x0041)
-			}
-			if unicode.IsLower(r) {
-				o = rune(int(r) + lc - 0x0061)
-			}
-			offset[i] = o
-		}
-		return []byte(string(offset))
-	}
+// Trims tags
+func trimtag(bytes []byte) []byte {
+	s := string(bytes)
+	trimmed := s[3 : len(s)-4]
+	return []byte(trimmed)
 }
 
 // Adds appropriate formatting by fixing escaped quotes and the HTML-style tags.
@@ -69,10 +51,10 @@ func format(entry string) string {
 	newlined := re.ReplaceAllString(quoted, "\n")
 
 	re = regexp.MustCompile("<b>.*</b>")
-	offset := re.ReplaceAllFunc([]byte(newlined), offsetter(0x1D400, 0x1D41A))
+	offset := re.ReplaceAllFunc([]byte(newlined), trimtag)
 
 	re = regexp.MustCompile("<i>.*</i>")
-	italiced := re.ReplaceAllFunc([]byte(offset), offsetter(0x1D434, 0x1D44E))
+	italiced := re.ReplaceAllFunc([]byte(offset), trimtag)
 
 	re = regexp.MustCompile("<sprite.*?>")
 	sprited := re.ReplaceAllFunc([]byte(italiced), spriter)
@@ -129,6 +111,7 @@ func main() {
 		os.Getenv("CONSUMER_KEY_SECRET"))
 	for {
 		entry := getRandomEntry()
+		entry := "Test that the <b>tags</b> have been properly <i>trimmed</i>"
 		entry = format(entry)
 		tweet(api, entry)
 		time.Sleep(seconds)
