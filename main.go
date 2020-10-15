@@ -85,7 +85,7 @@ func getRandomEntry() string {
 	row := db.QueryRow(
 		`SELECT id, entry
 		FROM entries
-		WHERE postcount=0 AND LENGTH(entry)<=280
+		WHERE LENGTH(entry)<=280
 		ORDER BY RANDOM() LIMIT 1;`)
 	err = row.Scan(&id, &entry)
 	check(err)
